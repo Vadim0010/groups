@@ -1,0 +1,19 @@
+@import "components/variables";
+@import "components/template-styles";
+@import "components/buttons";
+@import "animations";
+
+
+@import "blocks/main-styles";
+@import "blocks/auth";
+@import "blocks/nav";
+@import "blocks/cards-style";
+@import "blocks/search-form";
+@import "blocks/groups";
+@import "blocks/profile";
+@import "blocks/messages";
+@import "blocks/chat";
+
+@import "../../../../node_modules/noty/src/noty";
+
+@import "responsive";

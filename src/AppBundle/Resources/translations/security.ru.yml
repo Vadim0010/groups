@@ -1,0 +1,14 @@
+Invalid credentials.: 'Неверно указаны имя пользователя или пароль!'
+resetting_password: 'Восстановить пароль'
+Bad credentials.: 'Неверно указаны имя пользователя или пароль!'
+User account is disabled.: 'Пользователь отключён'
+resetting:
+    email:
+        subject: 'Восстановление пароля'
+        welcome: Приветствуем, %username%!
+        request: 'Мы отправили Вам это электронное письмо, потому что получили запрос на сброс пароля для вашей учетной записи.'
+        not_request: 'Если Вы не запрашивали сброс пароля, проигнорируйте данное письмо.'
+        reset: 'Для сброса пароля, пожалуйста, пройдите по ссылке:'
+        Reset the Password: 'Сбросить пароль'
+        With best wishes, site team.: 'С наилучшими пожеланиями, команда сайта.'
+        If you’re having trouble clicking the "Reset the Password" button, copy and paste the URL below into your web browser: 'Если у вас возникли проблемы с нажатием кнопки «Сбросить пароль», скопируйте и вставьте URL-адрес ниже в свой веб-браузер:'

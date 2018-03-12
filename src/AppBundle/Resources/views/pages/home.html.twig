@@ -1,0 +1,104 @@
+{% extends '@App/layouts/base.html.twig' %}
+
+{% block body %}
+
+    {% include '@App/parts/search-form.html.twig' %}
+
+    <div class="container">
+        <div class="cards-block new-card">
+            {% if groups|length > 0 %}
+                {% for chunkedGroups in groups|batch(16) %}
+                    <div class="custom-cards-columns">
+                        {% for group in chunkedGroups %}
+                            <div class="custom-cards-column">
+                                <div class="card-container">
+                                    <div class="card product-card">
+                                        <header class="card-header">
+                                            <div class="card-header-title">
+                                                <a href="{{ path('group_inside', {slug: group.slug}) }}">
+                                                    {{ group.name|trim }}
+                                                </a>
+                                            </div>
+                                        </header>
+                                        <div class="card-image">
+                                            {% if group.isVerify %}
+                                                <div class="verify-block tooltips verified">
+                                                    <i class="fa fa-check"></i>
+                                                    <span>{{ 'Verified' | trans }}</span>
+                                                </div>
+                                            {% endif %}
+                                            <div class="card-circle-image">
+                                                <img
+                                                        src="{% if file_exists(web_path ~ group.groupAvatar) %}{{ asset(group.groupAvatar) }}{% else %}{{ asset('images/default-50x50.gif') }}{% endif %}"
+                                                        alt="{{ group.name|trim }}"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="card-content card-face-content">
+                                            <div class="panel-block-item">
+                                                <div class="card-bottom-info">
+                                                    <span class="subscribers">
+                                                        {{ 'subscribers'|trans }}
+                                                        <strong>{{ group.subscribers|number_format }}</strong>
+                                                    </span>
+                                                    <br>
+                                                    <span class="profit">
+                                                        {{ 'profit'|trans }}
+                                                        <strong>
+                                                        {% if group.gain %}
+                                                            {{ group.gain|number_format(2, '.', ' ') }}
+                                                            {% if group.currency and group.currency.isShow %}
+                                                                {{ group.currency.symbol }}/{{ 'monthly'|trans }}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {{ 'not_specified'|trans }}
+                                                        {% endif %}
+                                                    </strong>
+                                                    </span>
+                                                </div>
+
+                                                <p class="price">
+                                                    {{ 'price'|trans }} :
+                                                    <span>
+                                                    {% if group.price %}
+                                                        {{ group.price|number_format(2, '.', ' ') }}
+                                                        {% if group.currency and group.currency.isShow %}
+                                                            {{ group.currency.symbol }}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {{ 'price_not_specified'|trans }}
+                                                    {% endif %}
+                                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div style="background-color: #fff; margin-top: 50px; text-align: center">
+                    <div class="columns">
+                        <div class="column" style="">
+                            <h3 style="font-size: x-large; font-weight: 700; color: rgba(14,12,44,0.98)">
+                                Здесь пока пусто 😔! Вы можете быть первым, кто добавит группу 🙂!
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {{ knp_pagination_render(paginator) }}
+    </div>
+{% endblock %}
+
+{% block title %}{{ 'main_page_title'|trans }} - {{ site_name }}{% endblock %}
+{% block keywords %}{{'main_page_keywords'|trans}}{% endblock %}
+{% block description %}{{'main_page_description'|trans}}{% endblock %}
+{% block og %}
+    <meta property="og:title" content="{{ 'main_page_title'|trans }} - {{ site_name }}" />
+    <meta property="og:description" content="{{'main_page_description'|trans}}" />
+    <meta property="og:image" content="{{ asset('images/logo2.png') }}" />
+{% endblock %}

@@ -1,0 +1,193 @@
+.profile-block {
+  .sellers-rating {
+    font-size: 35px;
+    font-weight: bold;
+    i {
+      font-size: 35px;
+      font-weight: lighter;
+    }
+    .positive {
+      color: $bulma-green;
+      i {
+        color: $bulma-green;
+      }
+    }
+    .negative {
+      color: $bulma-red;
+      i {
+        color: $bulma-red;
+      }
+    }
+  }
+  .profile-filter-block {
+    margin-top: 1.5rem;
+    h2 {
+      margin: 0;
+    }
+  }
+  .name {
+    p {
+      display: inline-flex;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+  .rating {
+    padding: 50px 10px;
+  }
+  .seller-contacts {
+    padding-top: 10px;
+    a {
+      display: block;
+    }
+    .content {
+      margin: 0;
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+  .profile-heading {
+    position: relative;
+  }
+  .profile-edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+  }
+}
+
+.profile-groups-list {
+  .group-list-element {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    padding: .7rem;
+    transition: $transition-duration linear;
+  }
+  .circle-image {
+    margin: 0 1.5rem 0 0;
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+    img {
+      width: 60px;
+      min-width: 60px;
+      height: 60px;
+    }
+  }
+  .link-block {
+    flex-grow: 1;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    a {
+      font-size: 2rem;
+      white-space: nowrap;
+    }
+  }
+}
+
+/*.user-change-form {
+  margin-top: 3.5rem;
+  .field-label {
+    flex-grow: 1.5;
+  }
+  .user-current-data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    .content {
+      margin-bottom: 1rem;
+    }
+  }
+}*/
+
+.list-row {
+  display: inline-flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .list-el {
+    width: 49%;
+    margin: 1rem 0;
+  }
+}
+
+.profile-tabs {
+  margin-top: 1.5rem;
+  background-color: #fff;
+  padding-top: 1.5rem;
+  .profile-groups-block {
+    display: none;
+    padding: 0 15px;
+    table {
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  .profile-contacts-block {
+    display: none;
+    padding: 0 15px;
+    table {
+      width: 50%;
+      margin: 0 auto;
+      border: none;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  .active-tab{
+    display: block;
+  }
+}
+
+.profile-edit-block{
+  background-color: #fff;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  .settings-wrapper{
+    display: inline-flex;
+    width: 100%;
+    .settings-menu{
+      width: 17%;
+    }
+    .settings-content{
+      width: 83%;
+      padding-left: 1.5rem;
+      .circle-image{
+        margin: .5rem 0;
+        width: 70px;
+        height: 70px;
+        img{
+          width: 70px;
+          height: 70px;
+        }
+      }
+      .settings-control-group{
+        margin: 1.5rem 0;
+        .settings-control-name{
+          font-weight: bold;
+          font-size: 15px;
+          margin-bottom: .5rem;
+        }
+        &:first-child{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .tabs-content{
+    display: none;
+  }
+  .tabs-content.active-tab{
+    display: block;
+  }
+
+}

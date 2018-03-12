@@ -1,0 +1,112 @@
+.messages-index {
+  .message-theme-block{
+    margin: 1rem 0;
+  }
+}
+
+.messages-inside{
+  .messages-list-wrapper{
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: auto;
+    .list{
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
+
+  .single-message{
+    max-width: 80%;
+    margin: 1rem 0;
+    .notification{
+      background-color: #ededed;
+      .date{
+        opacity: .7;
+      }
+      .msg-author{
+        position: relative;
+        bottom: 10px;
+        font-size: 20px;
+        a{
+          text-decoration: none;
+          transition: $transition-duration linear;
+          color: $bulma-cyan;
+          &:hover{
+            color: #000 ;
+          }
+        }
+      }
+    }
+  }
+  .incoming-message{
+    .notification{
+      .date{
+        position: relative;
+        top: 12px;
+      }
+      &:before{
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8.5px 15px 8.5px 0;
+        border-color: transparent #ededed transparent transparent;
+        position: absolute;
+        left: -14px;
+        bottom: 10px;
+      }
+    }
+  }
+  .outgoing-message{
+    margin-left: auto;
+    .notification{
+      padding: 1.25rem 1.5rem 1.25rem 2.5rem;
+      .msg-delete{
+        transition: $transition-duration linear;
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        opacity: .5;
+      }
+      .msg-author{
+        text-align: right;
+      }
+      .date{
+        position: relative;
+        text-align: right;
+        top: 12px;
+      }
+      &:before{
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8.5px 0 8.5px 15px;
+        border-color: transparent transparent transparent #ededed;
+        position: absolute;
+        right: -14px;
+        bottom: 10px;
+      }
+      &:hover{
+        .msg-delete{
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.message-send-form{
+  margin-top: 2rem;
+  width: 80%;
+  margin-left: auto;
+  text-align: right;
+  button{
+    margin-top: .7rem;
+  }
+  textarea{
+    width: 100%;
+    resize: vertical;
+    min-height: 90px;
+  }
+}

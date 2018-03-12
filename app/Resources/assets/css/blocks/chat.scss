@@ -1,0 +1,150 @@
+.chat-wrapper{
+  margin-top: 20px;
+  background-color: #fff;
+  height: 80vh;
+  display: inline-flex;
+  width: 100%;
+  transition: $transition-duration linear;
+  .dialog-list-wrapper{
+    width: 27%;
+    overflow-y: auto;
+    .dialog-list-element{
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+      padding: 7px;
+      border-bottom: 1px solid #eeeeee;
+      cursor: pointer;
+      .dialog-list-avatar{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+        overflow: hidden;
+        img{
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .description{
+        .author{
+          font-weight: bold;
+          font-size: 17px;
+        }
+        .last-message{
+          font-size: 15px;
+        }
+        .date{
+          font-size: 12px;
+          color: #4f4f4f;
+        }
+      }
+    }
+    .active_el{
+      background-color: $bulma-cyan;
+      color: #fff;
+      .description{
+        .date{
+          color: #fff;
+        }
+      }
+    }
+  }
+  
+  
+  
+  .dialog-inside-wrapper{
+    width: 83%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: #ededed;
+    .dialog-inside-header{
+      background-color: #fff;
+      padding: 8px;
+      height: 60px;
+      align-items: center;
+      display: none;
+      .message-list-btn{
+        margin-right: 15px;
+        font-size: 25px;
+      }
+      .header-chat-name{
+        font-weight: bold;
+        font-size: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .dialog-inside-messages{
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+      height: 100%;
+      .chat-message{
+        background-color: #fff;
+        margin: 15px 10px;
+        padding: 10px;
+        max-width: 65%;
+        position: relative;
+        .msg-date{
+          font-size: 14px;
+          color: #737373;
+        }
+      }
+      .incoming-message{
+        margin-right: auto;
+        text-align: left;
+        &:after{
+          content: '';
+          position: absolute;
+          border-style: solid;
+          border-width: 8px 9px 8px 0;
+          border-color: transparent #FFFFFF;
+          display: block;
+          width: 0;
+          z-index: 1;
+          left: -9px;
+          bottom: 0;
+        }
+      }
+      .outgoing-message{
+        margin-left: auto;
+        text-align: left;
+        &:after{
+          content: '';
+          position: absolute;
+          border-style: solid;
+          border-width: 8px 0 8px 9px;
+          border-color: transparent #FFFFFF;
+          display: block;
+          width: 0;
+          z-index: 1;
+          right: -9px;
+          bottom: 0;
+        }
+      }
+    }
+    .dialog-inside-form{
+      display: none;
+      padding: 10px;
+      input{
+        width: 94%;
+      }
+      .button{
+        border-radius: 50%;
+        padding: 9px;
+        i{
+          color: #fff;
+          font-size: 15px;
+          padding: 0;
+        }
+
+      }
+    }
+
+  }
+}

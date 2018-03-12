@@ -1,0 +1,53 @@
+{% extends "@App/layouts/profile.html.twig" %}
+
+{% block title %}{{ 'Edit profile'|trans }}{% endblock %}
+
+{% block body %}
+
+    {{ form_start(avatarForm) }}
+        <div class="settings-control-group">
+            <p class="settings-control-name">{{ 'Update avatar'|trans }}</p>
+            <div class="circle-image">
+                <img src="{{ asset(app.user.imagePath)|imagine_filter('user_avatar') }}" alt="{{ app.user.username }}">
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <div class="file has-name is-fullwidth">
+                            <label class="file-label" for="avatar-input">
+                                {{ form_row(avatarForm.avatar, {
+                                    "id": "avatar-input",
+                                    "label": false,
+                                    "attr": {"class": 'file-input'}
+                                }) }}
+                                <span class="file-cta">
+                                    <span class="file-icon"><i class="fa fa-upload"></i></span>
+                                    <span id="js-file-label" class="file-label">{{'Choose a file…'|trans}}</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{ form_end(avatarForm) }}
+
+    {{ form_start(profileForm) }}
+        {{ form_widget(profileForm) }}
+        <p class="control" style="margin: 1.5em 0;">
+            <button class="button is-primary">{{ 'Save'|trans }}</button>
+        </p>
+    {{ form_end(profileForm) }}
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        (function($){
+            $('#avatar-input').on('change', function(){
+                $('#js-file-label').text('{{ 'load'|trans }}');
+                this.form.submit();
+            });
+        })(jQuery);
+    </script>
+{% endblock %}

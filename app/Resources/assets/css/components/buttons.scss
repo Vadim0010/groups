@@ -1,0 +1,27 @@
+.btn-blue{
+  background-color: $main-blue;
+  border: none;
+  color: #fff;
+}
+.btn-red{
+  background-color: $main-red;
+  border: none;
+  color: #fff;
+
+}
+.btn-yellow{
+  background-color: $main-yellow;
+  border: none;
+  color: #000;
+}
+.btn-green{
+  background-color: $main-green;
+  border: none;
+  color: #fff;
+  transition: $transition-duration linear;
+  &:hover{
+    color: #fff;
+    background-color: #72A452;
+  }
+}
+

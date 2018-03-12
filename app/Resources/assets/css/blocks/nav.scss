@@ -1,0 +1,109 @@
+.top-nav{
+  height: $nav-height;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  transition: $transition-duration linear;
+  .nav-item img{
+    max-height: 2.75rem;
+  }
+  .nav-right{
+    overflow: visible;
+  }
+  .auth-buttons-block{
+    justify-content: center;
+  }
+  .navbar-message{
+    margin-left: -5px;
+    position: relative;
+    top: 8px;
+    .tags{
+      margin-bottom: 0;
+    }
+    .tag:last-child:not(:first-child),.tag:first-child:not(:last-child){
+      margin: 0;
+    }
+    .last-message-wrapper{
+      padding-top: 10px;
+    }
+    .last-message-list{
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #d2d2d2;
+      width: 420px;
+      left: -254px;
+      max-height: 240px;
+      overflow: auto;
+      .last-message-el{
+        padding: 7px;
+        border-bottom: 1px solid #d2d2d2;
+        transition: .2s linear;
+        .message-title{
+          color: #00d1b2;
+        }
+        .message-text{
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        .date{
+          font-size: 11px;
+        }
+        &:last-child{
+          border-bottom:none;
+        }
+        &:hover{
+          background-color: #00d1b2;
+          color: #fff;
+          .message-title{
+            color: #545454;
+          }
+        }
+      }
+    }
+  }
+  .nav-msg-el{
+    display: inline-flex;
+    align-items: center;
+    a{
+      height: 100%;
+    }
+    &:hover{
+      .last-message-list{
+        display: block;
+      }
+    }
+  }
+}
+
+.top-nav-plug{
+  height:$nav-height;
+}
+.user-dropdown{
+  display: flex;
+  align-items: center;
+  .button{
+    padding: 0 5px;
+  }
+  .dropdown-avatar{
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    border: 0 solid transparent;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+      width: 100%;
+    }
+  }
+  a.dropdown-item {
+    text-align: left;
+    font-size: 17px;
+  }
+
+}
+.mobile-controls{
+  display: none;
+}

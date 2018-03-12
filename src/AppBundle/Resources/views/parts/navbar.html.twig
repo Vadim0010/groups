@@ -1,0 +1,124 @@
+<nav class="nav has-shadow top-nav" id="top-nav-block">
+    <div class="container">
+        <div class="nav-left">
+            <a class="nav-item" href="{{ path('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="{{ site_name }}">
+            </a>
+        </div>
+        <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="nav-right nav-menu">
+            <a class="nav-item is-tab {% if app.request.attributes.get('_route') == 'home' %}is-active{% endif %}" href="{{ path('home') }}">
+                {{ 'home'|trans }}
+            </a>
+            {#<a class="nav-item is-tab {% if app.request.attributes.get('_route') == 'guarantee' %}is-active{% endif %}" href="#">
+                {{ 'guarantee'|trans }}
+            </a>#}
+            <a class="nav-item is-tab {% if app.request.attributes.get('_route') == 'contacts' %}is-active{% endif %}" href="{{ path('contacts') }}">
+                {{ 'contacts'|trans }}
+            </a>
+            {% if is_granted('ROLE_USER') %}
+                {% set count_new_messages = newCountMessage() %}
+                <div class="nav-msg-el">
+                    <a class="nav-item is-tab" href="{{ path('messages-list') }}">{{ 'messages'|trans }}</a>
+                    {% if count_new_messages > 0 %}
+                        {% set new_messages = newMessage() %}
+                        <div class="control navbar-message" id="last-message-list-container">
+                            <div class="tags has-addons">
+                                <span class="tag is-danger" id="count-all-unread-messages">{{ count_new_messages }}</span>
+                            </div>
+
+                            <div class="last-message-wrapper">
+                                <div class="last-message-list scroll-block">
+                                    {% for message in new_messages %}
+                                        <div class="last-message-el" data-chat="{{ message.chat.id }}">
+                                            <a href="{{ path('messages-list', {'chat': message.chat.id}) }}" class="message-title">
+                                                {{ message.chat.subject }}
+                                            </a>
+                                            <p class="message-text">
+                                                <span class="message-title">
+                                                    @{{ message.sender.username }}:
+                                                </span>
+                                                {{ message.body }}
+                                            </p>
+                                            <p class="date">{{ message.createdAt|date(' H:i d.m.y') }}</p>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="last-message-el">
+                                        <a href="{{ path('messages-list') }}" class="message-title">
+                                            {{ 'more_message'|trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <span class="nav-item">
+                {% if is_granted('ROLE_USER') %}
+                    <a class="button btn-green" href="{{ path('group_add') }}">{{ 'add_group'|trans }}</a>
+                {% else %}
+                    <a class="button btn-green login-button" href="#">{{ 'add_group'|trans }}</a>
+                {% endif %}
+            </span>
+            <span class="nav-item field has-addons auth-buttons-block">
+                {% if is_granted('ROLE_USER') %}
+                    <div class="dropdown user-dropdown is-right">
+                        <div class="dropdown-trigger" id="nav-profile-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                                <span class="dropdown-avatar">
+                                    <img src="{{ asset(app.user.imagePath)|imagine_filter('chat_avatar') }}" alt="{{ app.user.username }}">
+                                </span>
+                                <span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu " id="nav-profile-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="{{ path('profile_edit') }}">@{{ app.user.username }}</a>
+                                <hr class="dropdown-divider">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('easyadmin') }}" target="_blank" class="dropdown-item">
+                                        {{ 'Back Office'|trans }}
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                {% endif %}
+                                <a href="{{ path('profile_edit') }}" class="dropdown-item">
+                                    {{ 'profile'|trans }}
+                                </a>
+                                <a href="{{ path('messages-list') }}" class="dropdown-item">
+                                    {{ 'messages'|trans }}
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a href="{{ path('fos_user_security_logout') }}" class="dropdown-item">
+                                    {{ 'logout'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="mobile-controls">
+                       <span class="control">
+                        <a href="{{ path('profile_edit') }}" class="button">{{ 'profile'|trans }}</a>
+                        </span>
+                        <span class="control">
+                            <a href="{{ path('fos_user_security_logout') }}" class="button">{{ 'logout'|trans }}</a>
+                        </span>
+                    </span>
+                {% else %}
+                    <span class="control">
+                        <a class="button login-button"
+                           href="{{ path('fos_user_security_login') }}">{{ 'login'|trans }}</a>
+                    </span>
+                    <span class="control">
+                        <a class="button is-info"
+                           href="{{ path('fos_user_registration_register') }}">{{ 'register'|trans }}</a>
+                    </span>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</nav>
+<div class="top-nav-plug"></div>

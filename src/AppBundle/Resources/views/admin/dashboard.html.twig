@@ -1,0 +1,205 @@
+{% extends '@App/layouts/admin.html.twig' %}
+
+{% set _content_title = 'Admin dashboard' %}
+
+{% block page_title -%}
+    {{ _content_title }}
+{%- endblock %}
+
+{% block main %}
+    <section class="content">
+        <div class="row">
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ countUsers }}</h3>
+
+                        <p>{{ 'Users'|trans }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">{{ 'More info'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{ countGroups }}</h3>
+
+                        <p>{{ 'Added groups'|trans }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-group"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">{{ 'More info'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ countMessages }}</h3>
+
+                        <p>{{ 'Sent messages'|trans }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">{{ 'More info'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ countComments }}</h3>
+
+                        <p>{{ 'Comments'|trans }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-comments-o"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">{{ 'More info'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ 'Recently Added Groups'|trans }}</h3>
+                    </div>
+                    <div class="box-body">
+                        {% if lastGroups|length > 0 %}
+                            <ul class="products-list product-list-in-box">
+                                {% for group in lastGroups %}
+                                    <li class="item">
+                                        <div class="box {% if group.isVerify %}box-success{% else %}box-warning{% endif %}">
+                                            <div class="box-header with-border">
+                                                <div class="product-img">
+                                                    <img src="{% if file_exists(web_path ~ group.groupAvatar) %}{{ asset(group.groupAvatar) }}{% else %}{{ asset('images/default-50x50.gif') }}{% endif %}" alt="{{ group.name }}">
+                                                </div>
+                                                <div class="product-info">
+                                                    <a href="javascript:void(0)" class="product-title">
+                                                        {{ group.name }}
+                                                    </a>
+                                                    {% if group.isVerify %}
+                                                        <span class="label label-success pull-right" title="{{ 'The Group is verified'|trans }}">
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="label label-warning pull-right" title="{{ 'Group is not verified'|trans }}">
+                                                            <i class="fa fa-warning"></i>
+                                                        </span>
+                                                    {% endif %}
+                                                    {% if group.price %}
+                                                        <p>
+                                                            <span><b>{{ 'price'|trans }}</b></span>
+                                                            <span>
+                                                                {{ group.price|number_format(2, '.', ' ') }}
+                                                                {% if group.currency and group.currency.isShow %}
+                                                                    {{ group.currency.symbol }}
+                                                                {% endif %}
+                                                            </span>
+                                                        </p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+                                                        <div class="description-block border-right">
+                                                            <p class="description-header">{{ group.subscribers|number_format }}</p>
+                                                            <span class="description-text">{{ 'group_subscribers'|trans }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+                                                        <div class="description-block border-right">
+                                                            <p class="description-header">
+                                                                {% if group.gain %}
+                                                                    {{ group.gain|number_format(2, '.', ' ') }}
+                                                                    {% if group.currency and group.currency.isShow %}
+                                                                        {{ group.currency.symbol }}/{{ 'monthly'|trans }}
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                    {{ 'not_specified'|trans }}
+                                                                {% endif %}
+                                                            </p>
+                                                            <span class="description-text">{{ 'profit'|trans }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+                                                        <div class="description-block border-right">
+                                                            <p class="description-header">
+                                                                {% if group.expense %}
+                                                                    {{ group.expense|number_format(2, '.', ' ') }}
+                                                                    {% if group.currency and group.currency.isShow %}
+                                                                        {{ group.currency.symbol }}/{{ 'monthly'|trans }}
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                    {{ 'not_specified'|trans }}
+                                                                {% endif %}
+                                                            </p>
+                                                            <span class="description-text">{{ 'expense'|trans }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="callout callout-info">
+                                <h4>{{ 'No new groups'|trans }}</h4>
+
+                                <p>{{ 'No groups added during the period'|trans({'%period%': period|trans}) }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="javascript:void(0)" class="uppercase">{{ 'View All Groups'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ 'Latest Registered'|trans|truncate(20) }}</h3>
+
+                        <div class="box-tools pull-right">
+                            <span class="label label-danger">{{ lastUsers|length ~ ' new' }}</span>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding" style="">
+                        {% if lastUsers %}
+                            <ul class="users-list clearfix">
+                                {% for user in lastUsers %}
+                                    <li>
+                                        <img src="{{ asset(user.imagePath)|imagine_filter('user_avatar') }}" alt="{{ user.username }}">
+                                        <a class="users-list-name" href="#">{{ user.username }}</a>
+                                        <span class="users-list-date">{{ user.createdAt|date('H:i d.m.y') }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="callout callout-info">
+                                <h4>{{ 'No new users'|trans }}</h4>
+
+                                <p>{{ 'No user registered in the period'|trans({'%period%': period|trans}) }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="box-footer text-center" style="">
+                        <a href="javascript:void(0)" class="uppercase">{{ 'View All Users'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

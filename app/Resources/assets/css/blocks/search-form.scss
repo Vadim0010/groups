@@ -1,0 +1,107 @@
+.search-form-container {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 15px;
+  .top-form {
+    text-align: center;
+    .control {
+      text-align: center;
+    }
+    .line-field{
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      .label{
+        margin-right: 7px;
+        margin-bottom: 0;
+      }
+    }
+    .line-field-keywords{
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .label{
+        margin-right: 7px;
+        margin-bottom: 0;
+      }
+      .control{
+        width: 80%;
+      }
+    }
+    .check-box-block {
+      display: flex;
+      height: 100%;
+      justify-content: space-around;
+      padding-top: 9px;
+    }
+  }
+  .bottom-form {
+    text-align: center;
+    margin-top: 35px;
+    display: none;
+
+  }
+  .full-form-button-block {
+    margin-top: 15px;
+    text-align: right;
+    button{
+      margin-top: 5px;
+    }
+  }
+
+  .horizontal-select {
+    display: inline-flex;
+    input {
+      max-width: 50%;
+    }
+  }
+
+  /*Checkboxes styles*/
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    font: 14px/20px 'Open Sans', Arial, sans-serif;
+    color: #000;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  input[type="checkbox"] + label:last-child {
+    margin-bottom: 0;
+  }
+
+  input[type="checkbox"] + label:before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $bulma-green;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .6;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+  }
+
+  input[type="checkbox"]:checked + label:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}

@@ -1,0 +1,18 @@
+{% if pageCount > 1 %}
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <ul class="pagination-list">
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li>
+                        <a class="pagination-link btn-blue" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="pagination-link btn-blue is-current" href="javascript:void(0);">{{ page }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}

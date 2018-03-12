@@ -1,0 +1,303 @@
+//card-fix on line 9, 50, 114
+
+
+@media only screen and (max-width: 1408px){
+
+  .cards-block .product-card figure.image{
+    padding: 140px;
+  }
+  .card-container .back .card-back-content .back-price{
+    font-size: 1.5rem;
+  }
+  .custom-cards-columns{
+    justify-content: center;
+  }
+
+}
+
+@media only screen and (max-width: 1024px){
+  .list-row .list-el{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1215px) {
+  .card-container {
+    .front{
+      .card-image{
+        figure.image{
+          padding: 150px;
+        }
+      }
+      .card-face-content{
+        text-align: center;
+        .price{
+          font-size: 25px;
+          margin-top: 20px;
+        }
+      }
+    }
+    .back {
+      .card-back-content{
+        .back-price {
+          margin:0;
+          font-size: 1.7rem;
+
+        }
+      }
+
+      hr{
+        margin: 0.5rem 0 1rem 0;
+      }
+    }
+
+  }
+  .card-container .back .button.is-large{
+    font-size: 1rem;
+  }
+  .profile-block .sellers-rating{
+    font-size: 20px;
+    i{
+      font-size: 20px;
+    }
+  }
+  .group-inside .group-inside-seller .sellers-rating{
+    font-size: 20px;
+    padding-top: 20px;
+    i{
+      font-size: 20px;
+    }
+  }
+
+  .custom-cards-columns .custom-cards-column{
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 1023px){
+  .card-container {
+    .back{
+      .seller-info-block {
+        .sellers-name{
+          font-size: 17px;
+        }
+        .sellers-rating{
+          font-size: 17px;
+          i{
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px){
+  .chat-wrapper .dialog-inside-wrapper .dialog-inside-header{
+    display: inline-flex;
+  }
+
+  .hide-list-mobile{
+    .dialog-list-wrapper{
+      width: 250px;
+      position: absolute;
+      transform: translateX(-250px);
+    }
+    .dialog-inside-wrapper{
+      width: 100%;
+    }
+  }
+
+  .chat-wrapper{
+    .dialog-list-wrapper{
+      width: 250px;
+      min-width: 250px;
+    }
+    .dialog-inside-wrapper{
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px){
+  /*TODO: Maybe move tabs on top?!*/
+  .settings-menu .panel-text{
+    display: none;
+  }
+  .profile-edit-block .settings-wrapper .settings-menu{
+    width: 50px;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .is-mobile-seen{
+    display: block;
+  }
+  .group-add-container{
+    padding: .75rem;
+  }
+  .reg-form-container{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  .block-container{
+    margin-left: .75rem;
+    margin-right: .75rem;
+  }
+  .cards-block,.search-form-container{
+    margin: 1.5rem 20% 0;
+  }
+  .top-nav{
+    height: 55px!important;
+  }
+  .card-container .front .card-image figure.image{
+    padding: 180px;
+  }
+  /*.card-container, .card-container .front, .card-container .back{
+    min-height: 555px;
+  }*/
+  .card-container .front .card-face-content .price{
+    margin-top: 5px;
+  }
+
+  .profile-block .sellers-rating{
+    font-size: 35px;
+    i{
+      font-size: 35px;
+    }
+  }
+
+  .group-inside .profile-heading{
+    text-align: center;
+  }
+  .group-inside-seller{
+    .to-line{
+      display: inline-flex;
+      width: 100%;
+    }
+  }
+
+  .profile-heading .name,.profile-heading .followers, .profile-heading .following{
+    border: none;
+  }
+
+  .top-nav .navbar-message{
+    display: none;
+  }
+
+  .custom-cards-columns .custom-cards-column{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .user-dropdown {
+    display: none;
+  }
+  .search-form-container .top-form .line-field-keywords{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .search-form-container .top-form .line-field-keywords .control{
+    width: 100%;
+    margin-top: 10px;
+  }
+  .search-form-container .top-form .line-field{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .search-form-container .top-form .control{
+    margin-top: 10px;
+  }
+  .mobile-controls{
+    display: block;
+  }
+}
+
+
+
+@media only screen and (max-width: 650px){
+  .group-inside-seller{
+    .to-line{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+    }
+    .sellers-rating{
+      justify-content: center;
+    }
+    .sellers-name{
+      justify-content: space-around;
+
+    }
+  }
+  .group-inside .group-inside-seller .sellers-rating{
+    font-size: 30px;
+    i{
+      font-size: 30px;
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 500px){
+  .card-container .front .card-image figure.image{
+    padding-top: 320px;
+  }
+  .group-list-element{
+    justify-content: center;
+    flex-wrap: wrap;
+    .group-image-wrapper{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .circle-image{
+        margin: 0;
+      }
+    }
+    .link-block{
+      width: 100%;
+      text-align: center;
+    }
+    .btn-block{
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 450px){
+  .cards-block, .search-form-container{
+    margin: 0.5rem 1rem 0;
+  }
+}
+
+
+
+
+
+@media only screen and (max-width: 400px){
+  .reg-form-container{
+    margin-left: .75rem;
+    margin-right: .75rem;
+    h1.title{
+      font-size: 1.6rem;
+    }
+  }
+  .login-form{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    margin-left: 0;
+    transform: translateY(-30%);
+  }
+
+  .chat-wrapper .dialog-inside-wrapper .dialog-inside-form input{
+    width: 85%;
+  }
+}
+
+

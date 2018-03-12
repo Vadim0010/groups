@@ -1,0 +1,114 @@
+{% extends "@App/layouts/base.html.twig" %}
+
+{% block title %}{{ 'List of Private Messages'|trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="chat-wrapper" id="chat-list-container">
+            {% if chats|length > 0 %}
+                <div class="dialog-list-wrapper scroll-block">
+                    {% for chat in chats %}
+                        {% set to_user = getCompanion(chat.user, app.user)|first %}
+                        <div
+                                class="dialog-list-element {% if select_chat and select_chat == chat %}active_el{% endif %}"
+                                id="chat-block-{{ chat.id }}"
+                                data-chat="{{ chat.id }}"
+
+                        >
+                            <div class="dialog-list-avatar">
+                                <img
+                                        src="{% if chat.group and file_exists(web_path ~ chat.group.groupAvatar) %}{{ asset(chat.group.groupAvatar) }}{% else %}{{ asset('images/default-50x50.gif') }}{% endif %}"
+                                        alt="{% if chat.group %}{{ chat.group.name }}{% else %}{{ chat.subject }}{% endif %}"
+                                >
+                            </div>
+                            <div class="description">
+                                <p class="author">
+                                    {{ chat.subject|truncate(18) }}
+                                    {% if select_chat != chat and chat.message|length > 0 %}
+                                        <span class="tag is-danger count-new-message">{{ chat.message|length }}</span>
+                                    {% endif %}
+                                </p>
+                                <p class="last-message">@{{ to_user.username }}</p>
+                                {#<p class="last-message"></p>#}
+                                {#<p class="date">26.10.2017</p>#}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="dialog-inside-wrapper">
+                    <div class="dialog-inside-header">
+                        <div class="message-list-btn" id="toggle-message-list">
+                            <i class="fa fa-bars"></i>
+                        </div>
+                        <p class="header-chat-name" id="header-chat-name"></p>
+                    </div>
+                    <div class="dialog-inside-messages scroll-block" id="dialog-messages-container">
+                        {% if select_chat %}
+                            {% include '@App/messages/parts/message-list-template.html.twig' with {'messages': select_chat.message} %}
+                        {% endif %}
+                    </div>
+                    <div class="dialog-inside-form" id="dialog-message-form">
+                        <input
+                                type="hidden"
+                                id="message_token"
+                                name="message_token"
+                                value="{{ csrf_token('message') }}"
+                        >
+                        <input
+                                type="hidden"
+                                id="message_chat_id"
+                                name="message_chat_id"
+                                value="{% if app.request.query.get('chat') %}{{ app.request.query.get('chat') }}{% endif %}"
+                        >
+                        <input
+                                type="text"
+                                id="message_reply"
+                                name="message_reply"
+                                required="required"
+                                class="input"
+                                placeholder="{{ 'message_enter'|trans }}"
+                        >
+                        <button class="button is-success" id="message-reply-form">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            {% else %}
+                <div class="column is-half is-offset-one-quarter">
+                    <div class="notification is-danger">
+                        <p class="subtitle text-center">{{ 'message_empty'|trans }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ asset('build/js/ajax_message.js') }}"></script>
+    <script>
+        new AjaxMessageSend(
+            '#chat-list-container',
+            {
+                chat_new: '{{ path('ajax-chat-new') }}',
+                chat_read: '{{ path('ajax-chat-read') }}',
+                chat_reply: '{{ path('ajax-chat-reply') }}'
+            }
+        );
+    </script>
+    {% if app.request.query.get('chat') %}
+        <script>
+            (function () {
+                let message_list = $('#dialog-messages-container');
+
+                $('#dialog-message-form').show();
+                message_list.animate(
+                    {scrollTop: message_list[0].scrollHeight},
+                    'fast'
+                );
+            })();
+        </script>
+    {% endif %}
+{% endblock %}

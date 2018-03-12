@@ -1,0 +1,48 @@
+parameters:
+    #parameter_name: value
+
+services:
+    AppBundle\Service\InstagramApiClient: ~
+
+    AppBundle\EventListener\RedirectAfterRegistrationSubscriber:
+      tags:
+        - { name: kernel.event_subscriber }
+
+    AppBundle\EventListener\GgroupListener:
+      tags:
+        - { name: kernel.event_subscriber }
+
+    AppBundle\Controller\CommentsController: ~
+
+#    app.images_loader:
+#        class: AppBundle\Service\ImageLoader
+#        autowire: true
+#        public: true
+#        arguments:
+#            ['%kernel.root_dir%']
+
+    AppBundle\Service\HandleMessage: ~
+
+    AppBundle\Twig\Extension\AppExtension: ~
+
+    AppBundle\Service\Notice: ~
+
+    authentication_handler:
+        class: AppBundle\Security\AuthenticationHandler
+        autowire: true
+
+    AppBundle\Controller\SendMessageController: ~
+    AppBundle\Entity\User: ~
+    AppBundle\Entity\Groups: ~
+
+    Symfony\Component\Security\Http\HttpUtils:
+        public: false
+
+    security.http_utils:
+        alias: Symfony\Component\Security\Http\HttpUtils
+        public: false
+
+    AppBundle\EventListener\LastActivityUserListener:
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }

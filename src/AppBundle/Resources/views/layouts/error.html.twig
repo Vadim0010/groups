@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="yandex-verification" content="906b4458f4433352" />
+    {% block meta_tags %}{% endblock %}
+
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <!-- Yandex.Metrika counter -->
+    {% include '@App/parts/yandex-metrika.html.twig' %}
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+    {% block nav %}{% endblock %}
+    {% block body %}{% endblock %}
+    {% block footer %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="yandex-verification" content="906b4458f4433352" />
+    {% block meta_tags %}{% endblock %}
+
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/style.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <!-- Yandex.Metrika counter -->
+    {% include '@App/parts/yandex-metrika.html.twig' %}
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body class="theme-page">
+
+<div class="page-content">
+
+
+
+    {% block navbar %}
+        {% include '@App/parts/navbar.html.twig' %}
+    {% endblock %}
+
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    <div class="container profile-edit-block">
+        <div class="content">
+            <h1>{% block tab_title %}{{ 'Settings'|trans }}{% endblock %}</h1>
+        </div>
+        <hr>
+        <div class="settings-wrapper tabs-block">
+            <div class="settings-menu">
+                <div class="menu-tabs" id="tabs-list">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="panel-block tab-btn" href="{{ path('easyadmin') }}" target="_blank">
+                        <span class="panel-icon">
+                            <i class="fa fa-cogs"></i>
+                        </span>
+                        <span class="panel-text">{{'Back Office'|trans}}</span>
+                        </a>
+                    {% endif %}
+                    <a class="panel-block tab-btn {% if currentRoute == 'profile_edit' %}is-active{% endif %}" href="{{ path('profile_edit') }}">
+                        <span class="panel-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="panel-text">{{'Personal info'|trans}}</span>
+                    </a>
+                    <a class="panel-block tab-btn {% if currentRoute == 'profile_group_list' %}is-active{% endif %}" href="{{ path('profile_group_list') }}">
+                        <span class="panel-icon">
+                            <i class="fa fa-users"></i>
+                        </span>
+                        <span class="panel-text">{{'Groups list'|trans}}</span>
+                    </a>
+                    <a class="panel-block tab-btn {% if currentRoute == 'fos_user_change_password' %}is-active{% endif %}" href="{{ path('fos_user_change_password') }}">
+                        <span class="panel-icon">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <span class="panel-text">{{ 'security'|trans }}</span>
+                    </a>
+                </div>
+                <hr>
+                <div class="menu-tabs" id="tabs-list">
+                    <a class="panel-block tab-btn {% if false %}is-active{% endif %}" href="#">
+                        <span class="panel-icon">
+                            <i class="fa fa-user-plus"></i>
+                        </span>
+                        <span class="panel-text">{{ 'Add Instagram account'|trans }}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="tabs-content active-tab">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% include '@App/parts/footer.html.twig' %}
+
+
+{% if not is_granted('ROLE_USER') %}
+    {% include '@App/parts/login-form.html.twig' %}
+{% endif %}
+
+<script src="{{ asset('build/js/app.js') }}"></script>
+{% if not is_granted('ROLE_USER') %}
+    <script src="{{ asset('build/js/ajax_login.js') }}"></script>
+    <script>
+        new AjaxLogin('#login-popup', '{{ path('fos_user_security_check') }}', '{{ csrf_token('authenticate') }}')
+    </script>
+{% endif %}
+{% block script %}{% endblock %}
+{% include("@App/parts/noty.html.twig") %}
+</body>
+
+</html>

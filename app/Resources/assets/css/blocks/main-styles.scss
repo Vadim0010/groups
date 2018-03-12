@@ -1,0 +1,141 @@
+body{
+  //background-image: linear-gradient(rgba(154, 18, 179, 0.6),rgba(0, 76, 102, 0.6)),linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6));
+  background-color: #d2e1e3;
+}
+
+a,button{
+  transition: $transition-duration linear;
+}
+
+.page-content{
+  min-height: calc(100vh - 82px);
+}
+
+.block-container{
+  margin-top: 3.5rem;
+  .block-inside-wrapper{
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  }
+}
+
+.is-mobile-seen{
+  display: none;
+}
+
+.has-no-margin{
+  margin: 0;
+}
+
+
+
+.circle-image{
+  border-radius: 50%;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  img{
+    width: 150px; height: 150px;
+  }
+}
+
+
+
+
+
+.scroll-block {overflow-y: scroll;}
+.scroll-block::-webkit-scrollbar-track {border-radius: 4px;}
+.scroll-block::-webkit-scrollbar {width: 6px;}
+.scroll-block::-webkit-scrollbar-thumb {border-radius: 4px;background: #f0f2f5;}
+.scroll-block:hover::-webkit-scrollbar-thumb {background: #6a7d9b;}
+
+
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+
+.full-width{
+  width:100%;
+}
+
+
+.cursor-default{
+  cursor: default;
+}
+
+
+
+
+label.checkbox{
+  transition: $transition-duration linear;
+  &:hover{
+    color: #00d1b2;
+  }
+}
+
+
+
+
+
+
+
+/*Декорация инпутов*/
+input:-moz-placeholder,textarea:-moz-placeholder {
+  transition: $transition-duration linear;
+}
+input::-moz-placeholder,textarea::-moz-placeholder {
+  transition: $transition-duration linear;
+}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+  transition: $transition-duration linear;
+}
+input:-ms-placeholder,textarea:-ms-placeholder {
+  transition: $transition-duration linear;
+}
+input::placeholder,textarea::placeholder {
+  transition: $transition-duration linear;
+}
+
+
+input:focus:-moz-placeholder,textarea:focus:-moz-placeholder {
+  color: transparent;
+}
+input:focus::-moz-placeholder,textarea:focus::-moz-placeholder {
+  color: transparent;
+}
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+input:focus:-ms-placeholder, textarea:focus:-ms-placeholder {
+  color: transparent;
+}
+input:focus::placeholder, textarea:focus::placeholder {
+  color: transparent;
+}
+
+
+
+
+
+
+
+
+/*FOOTER*/
+.footer-container{
+  background-color: #fff;
+  padding: .75rem;
+  margin-top: 3rem;
+  box-shadow:  0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+  h4{
+    margin: 0;
+  }
+}

@@ -1,0 +1,191 @@
+{% extends '@App/layouts/base.html.twig' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block body %}
+    <div class="container profile block-container profile-block">
+        <div class="block-inside-wrapper">
+            <div class="section profile-heading">
+                <div class="columns">
+                    <div class="column is-2">
+                        <div class="circle-image">
+                            <img src="{{ asset(user.imagePath)|imagine_filter('user_avatar') }}" alt="{{ user.username }}">
+                        </div>
+                    </div>
+                    <div class="column is-4 name">
+                        <p>
+                            <span class="title is-bold">{{ user.username }}</span>
+                        </p>
+                        {% if user.lastActivityAt %}
+                            {% if user.activeNow %}
+                                <span><i class="fa fa-circle" style="color: green"></i>online</span>
+                            {% else %}
+                                <span>{{ 'Last online'|trans ~ user.lastActivityAt|date('H:m d.m.y') }}</span>
+                            {% endif %}
+                        {% endif %}
+                        <p>
+                            <span>{{ 'Registered'|trans ~ user.createdAt|date('d.m.Y') }}</span>
+                        </p>
+                        {% if is_granted('ROLE_USER') and app.user != user %}
+                            <div class="tagline" id="container-user-data" data-user="{{ user.id }}">
+                                <button class="button is-primary is-outlined" id="message-add-form">{{ 'message_write'|trans }}</button>
+                                <div id="block-form-message">
+                                    {{ form_start(sendMessageForm) }}
+                                    {{ form_widget(sendMessageForm.message_subject, {
+                                        attr: {placeholder: 'message_subject' },
+                                    }) }}
+                                    {{ form_widget(sendMessageForm.message_body, {
+                                        attr: {placeholder: 'message_enter' },
+                                    }) }}
+                                    {{ form_end(sendMessageForm) }}
+                                    <button class="button is-success" id="message-send-form">{{ 'message_send_button'|trans }}</button>
+                                    <button class="button is-success" id="message-cancel-form">{{ 'cancel'|trans }}</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="column is-4 followers">
+                        <div class="content"><h3>{{ 'contacts'|trans }}</h3></div>
+                        <table class="table is-narrow" width="100%">
+                            <tr>
+                                <th class="has-text-left" width="30%">E-mail</th>
+                                <td class="has-text-right" width="70%">
+                                    {{ user.profile and user.profile.email ? user.profile.email : 'not indicated'|trans }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="has-text-left" width="30%">Skype</th>
+                                <td class="has-text-right" width="70%">{{ user.profile and user.profile.skype ? user.profile.skype : 'not indicated'|trans }}</td>
+                            </tr>
+                            <tr>
+                                <th class="has-text-left" width="30%">Viber</th>
+                                <td class="has-text-right" width="70%">{{ user.profile and user.profile.viber ? user.profile.viber : 'not indicated'|trans }}</td>
+                            </tr>
+                            <tr>
+                                <th class="has-text-left" width="30%">Telegram</th>
+                                <td class="has-text-right" width="70%">{{ user.profile and user.profile.telegram ? user.profile.telegram : 'not indicated'|trans }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="column is-2 rating has-text-centered">
+                        {#<p class="stat-val">10</p>
+                        <p class="stat-key">Сделок проведено</p>
+                        <p class="stat-val">
+                        <div class="sellers-rating">
+                            <span class="positive">2<i class="fa fa-arrow-up"></i></span>
+                            <span class="negative">0<i class="fa fa-arrow-down"></i></span>
+                        </div>
+                        </p>
+                        <p class="stat-key">Рейтинг продовца</p>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box profile-filter-block">
+            <!-- Main container -->
+            <nav class="level">
+                <div class="lever-left">
+                    <div class="content">
+                        <h2>Объявления продавца</h2>
+                    </div>
+                </div>
+                <!-- Right side -->
+                {#<div class="level-right">
+                    <p class="level-item"><strong>Все</strong></p>
+                    <p class="level-item"><a>Активные</a></p>
+                    <p class="level-item"><a>Архивные</a></p>
+                </div>#}
+            </nav>
+        </div>
+        <div class="cards-block new-card">
+            {% for chunkedGroups in user.socialGroup|batch(16) %}
+                <div class="custom-cards-columns">
+                    {% for group in chunkedGroups %}
+                        <div class="custom-cards-column">
+                            <div class="card-container">
+                                <div class="card product-card">
+                                    <header class="card-header">
+                                        <div class="card-header-title">
+                                            <a href="{{ path('group_inside', {slug: group.slug}) }}">
+                                                {{ group.name|trim }}
+                                            </a>
+                                        </div>
+                                    </header>
+                                    <div class="card-image">
+                                        <div class="card-circle-image">
+                                            <img
+                                                    src="{% if file_exists(web_path ~ group.groupAvatar) %}{{ asset(group.groupAvatar) }}{% else %}{{ asset('images/default-50x50.gif') }}{% endif %}"
+                                                    alt="{{ group.name|trim }}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="card-content card-face-content">
+                                        <div class="panel-block-item">
+                                            <div class="card-bottom-info">
+                                                    <span class="subscribers">
+                                                        {{ 'subscribers'|trans }}
+                                                        <strong>{{ group.subscribers|number_format }}</strong>
+                                                    </span>
+                                                <br>
+                                                <span class="profit">
+                                                        {{ 'profit'|trans }}
+                                                    <strong>
+                                                        {% if group.gain %}
+                                                            {{ group.gain|number_format(2, '.', ' ') }}
+                                                            {% if group.currency and group.currency.isShow %}
+                                                                {{ group.currency.symbol }}/{{ 'monthly'|trans }}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {{ 'not_specified'|trans }}
+                                                        {% endif %}
+                                                    </strong>
+                                                    </span>
+                                            </div>
+
+                                            <p class="price">
+                                                {{ 'price'|trans }} :
+                                                <span>
+                                                    {% if group.price %}
+                                                        {{ group.price|number_format(2, '.', ' ') }}
+                                                        {% if group.currency and group.currency.isShow %}
+                                                            {{ group.currency.symbol }}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {{ 'price_not_specified'|trans }}
+                                                    {% endif %}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    {% if is_granted('ROLE_USER') and app.user != user %}
+        <script src="{{ asset('build/js/ajax_message.js') }}"></script>
+        <script>
+            new AjaxMessageSend(
+                '#container-user-data',
+                {
+                    chat_new: '{{ path('ajax-chat-new') }}',
+                    chat_read: '{{ path('ajax-chat-read') }}',
+                    chat_reply: '{{ path('ajax-chat-reply') }}'
+                },
+                {
+                    recipient: '{{ user.id }}',
+                    group: '0'
+                }
+            );
+        </script>
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

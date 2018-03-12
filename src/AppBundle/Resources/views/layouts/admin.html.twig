@@ -1,0 +1,103 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+
+{% block header_custom_menu %}
+    {{ parent() }}
+    {% set countNewReports = newCountReports() %}
+    <ul class="nav navbar-nav">
+        <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-envelope-o"></i>
+                {% if countNewReports > 0 %}
+                    <span class="label label-success">{{ countNewReports }}</span>
+                {% endif %}
+            </a>
+            {% if countNewReports %}
+                {% set reports = newReports() %}
+                {% set entityReports = easyadmin_entity('Reports') %}
+                {% set menuIndex = 1 %}
+                {% set submenuIndex = -1 %}
+                {% for item in easyadmin_config('design.menu') %}
+                    {% if item.entity is defined and item.entity == entityReports.name  %}
+                        {% set menuIndex = loop.index0 %}
+                        {% if item.children|default([]) is not empty %}
+                            {% for subitem in item.children %}
+                                {% if subitem.submenuIndex is defined %}
+                                    {% set submenuIndex = subitem.submenuIndex %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <ul class="dropdown-menu">
+                    <li class="header">{{ 'You have count messages'|trans({'%count%': countNewReports }) }}</li>
+                    <li>
+                        <ul class="menu">
+                            {% for report in reports %}
+                                {% set report_sender = report.sender %}
+                                <li>
+                                    <a href="{{ path('easyadmin', {
+                                        action: 'show',
+                                        entity: entityReports.name,
+                                        id: report.id ,
+                                        menuIndex: menuIndex,
+                                        submenuIndex: submenuIndex,
+                                    }) }}">
+                                        <div class="pull-left">
+                                            <img
+                                                    src="{% if report_sender %}{{ asset(report_sender.imagePath)|imagine_filter('user_avatar') }}{% else %}{{ asset('images/no-photo.png') }}{% endif %}"
+                                                    class="img-circle"
+                                                    alt="{{ report.name }}"
+                                            >
+                                        </div>
+                                        <h4>
+                                            {{ report.email }}
+                                            <small><i class="fa fa-clock-o"></i>{{ report.createdAt|date('H:i d.m.y') }}</small>
+                                        </h4>
+                                        <p>{{ report.message }}</p>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="{{ path('easyadmin', {
+                            action: 'list',
+                            entity: entityReports.name,
+                            menuIndex: menuIndex,
+                            submenuIndex: submenuIndex,
+                        }) }}">{{ 'See All Reports'|trans }}</a></li>
+                </ul>
+            {% endif %}
+        </li>
+
+        <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="label label-danger">10</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header">You have 10 errors</li>
+                <li>
+
+                    <ul class="menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-warning text-red"></i> Errors List
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="footer"><a href="#">View all</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block user_menu_dropdown %}
+    <li>
+        <a href="{{ path('home') }}">{{ 'To the Website'|trans }}</a>
+    </li>
+    <li>
+        <a href="{{ path('profile_edit') }}">{{ 'profile'|trans }}</a>
+    </li>
+    {{ parent() }}
+{% endblock %}

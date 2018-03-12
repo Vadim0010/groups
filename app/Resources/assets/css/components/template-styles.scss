@@ -1,0 +1,125 @@
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+.has-text-muted {
+  color: #95A5A6;
+}
+/*.fa {
+  font-size:10px;
+  padding-top:3px;
+  color: #95A5A6;
+}*/
+.panel-block-item  {
+  display: inline-block;
+  color: #95A5A6;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.panel-block-item .tag,.panel-block-item .button  {
+  color: #95A5A6;
+  font-weight: bold;
+}
+
+.panel-block-item.is-right {
+  display: inline-block;
+  color: #95A5A6;
+  font-weight: bold;
+  float: right;
+}
+
+.panel-block-item .likes {
+  padding-right: 25px;
+}
+
+.panel-block-item .likes .fa,
+.panel-block-item .comments .fa
+{
+  font-size: 15px;
+  margin-top: -2px;
+}
+
+.avatar {
+  border-radius: 42px;
+  margin-right: 10px;
+  height: 42px;
+  width: 42px;
+  padding: 2px;
+  border: 1px solid #dbdbdb;
+}
+
+.timestamp {
+  color: #95A5A6;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+.container.profile {
+  margin-top:50px;
+}
+.profile-heading {
+  margin: 20px 0;
+  padding-bottom: 30px;
+}
+.profile-heading .name {
+  border-right: 1px solid #f1f1f1;
+  margin:-30px 0;
+  padding: 40px 30px 0 30px;
+}
+.profile-heading .followers, .profile-heading .following {
+  border-right: 1px solid #f1f1f1;
+  margin:-30px 0;
+}
+.profile-heading .likes {
+  margin:-30px 0;
+  padding: 70px 30px;
+}
+.profile-heading .stat-key {
+  font-size: 20px;
+  font-weight: 200;
+}
+.profile-heading .stat-val {
+  font-size: 35px;
+  font-weight: bold;
+}
+.profile-options {
+  background-color: #f1f1f1;
+  margin:-20px 0 20px 0;
+}
+.profile-options .link a {
+  padding:18px;
+  font-size: 18px;
+}
+.profile-options .link .icon {
+  font-size: 16px;
+  padding-top:2px;
+}
+.tagline {
+  padding:20px 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.avatar {
+  float: right;
+}
+.follow {
+  float: right;
+}
+.avatar img {
+  border-radius: 200px;
+}
+p.title.is-bold {
+  font-weight: bold;
+}
+.card .timestamp {
+  float:right;
+  color:#bbb;
+}

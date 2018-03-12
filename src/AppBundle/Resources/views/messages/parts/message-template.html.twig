@@ -1,0 +1,11 @@
+{% set class_m = message.sender == app.user ? 'outgoing-message animated slideInRight' : 'incoming-message animated slideInLeft' %}
+<div class="chat-message {{ class_m }}">
+    <img src="{{ asset(message.sender.imagePath)|imagine_filter('chat_avatar') }}" alt="{{ message.sender.username }}">
+    <a class="username" href="{{ path('profile_show', {username: message.sender.username}) }}">
+        @{{ message.sender.username }}
+    </a>
+    <p class="msg-text">{{ message.body|raw }}</p>
+    <p class="msg-date">
+        {{ message.createdAt|date('H:i d.m.y') }}
+    </p>
+</div>

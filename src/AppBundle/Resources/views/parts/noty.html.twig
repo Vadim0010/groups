@@ -1,0 +1,10 @@
+{% if app.session.flashbag.has('noty') %}
+    <script>
+        {% for message in app.flashes('noty') %}
+        new Noty({
+            text: '{{ message.text }}',
+            type: '{{ message.type }}'
+        }).show();
+        {% endfor %}
+    </script>
+{% endif %}

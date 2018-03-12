@@ -1,0 +1,134 @@
+.group-add-container {
+  .group-add-block {
+    h2 {
+      //color: #fff;
+      font-size: 2rem;
+    }
+    label {
+      //color: #fff;
+    }
+    .field {
+      margin: 1rem 0;
+    }
+    .add-group-name {
+      max-width: 280px;
+    }
+    .add-link-input {
+      padding-right: 30px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+.group-inside {
+  .section {
+    padding: 1rem;
+  }
+  .group-edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .profile-heading .name {
+    a {
+      color: #4a4a4a;
+      &:hover {
+        color: #00d1b2;
+      }
+    }
+  }
+  .group-inside-seller {
+
+    .sellers-name {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      .seller-avatar {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        margin-top: 8px;
+        margin-right: .75rem;
+        img {
+          width: 60px;
+          height: 60px;
+        }
+      }
+      a {
+        font-size: 20px;
+      }
+    }
+    .sellers-rating {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      i {
+        font-size: 30px;
+        font-weight: lighter;
+      }
+      .positive {
+        color: $bulma-green;
+        i {
+          color: $bulma-green;
+        }
+      }
+      .negative {
+        color: $bulma-red;
+        i {
+          color: $bulma-red;
+        }
+      }
+    }
+  }
+  .group-info {
+    .stat-val {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+  .group-comments {
+    .message {
+      .comment-author {
+        display: inline-flex;
+        align-items: center;
+        .author-pic {
+          margin-right: 0.75rem;
+          border-radius: 50%;
+          overflow: hidden;
+          height: 50px;
+          width: 50px;
+          img {
+            height: 50px;
+            width: 50px;
+          }
+        }
+        a {
+          text-decoration: none;
+          color: #4a4a4a;
+          font-size: 20px;
+        }
+      }
+      blockquote {
+        background-color: #e9e9e9;
+      }
+    }
+    textarea {
+      min-height: 150px;
+    }
+  }
+}
+
+.group-edit-block{
+  margin-top: 3rem;
+  .diff-table{
+    margin: .5rem auto;
+  }
+}
+
+#block-form-message {
+  display: none;
+}

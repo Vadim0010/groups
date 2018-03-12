@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="search-form-container">
+        {{ form_start(searchForm) }}
+            <div class="top-form">
+                <div class="columns">
+                    <div class="column is-4">
+                        <div class="field line-field">
+                            <label class="label" for="subscribers-select">{{ 'filter_subscribers'|trans }}</label>
+                            <div class="control horizontal-select">
+                                <input
+                                        id="{{ searchForm.subscribers.from.vars.id }}"
+                                        name="{{ searchForm.subscribers.from.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'from'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.subscribers.from.vars.data %}value="{{ searchForm.subscribers.from.vars.data }}"{% endif %}
+                                >
+                                <p>-</p>
+                                <input
+                                        id="{{ searchForm.subscribers.to.vars.id }}"
+                                        name="{{ searchForm.subscribers.to.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'to'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.subscribers.to.vars.data %}value="{{ searchForm.subscribers.to.vars.data }}"{% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field line-field">
+                            <label class="label" for="price-select">{{ 'price'|trans }}</label>
+                            <div class="control horizontal-select">
+                                <input
+                                        id="{{ searchForm.price.from.vars.id }}"
+                                        name="{{ searchForm.price.from.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'from'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.price.from.vars.data %}value="{{ searchForm.price.from.vars.data }}"{% endif %}
+                                >
+                                <p>-</p>
+                                <input
+                                        id="{{ searchForm.price.to.vars.id }}"
+                                        name="{{ searchForm.price.to.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'to'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.price.to.vars.data %}value="{{ searchForm.price.to.vars.data }}"{% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field line-field">
+                            <label class="label" for="gain-select">{{ 'Gain'|trans }}</label>
+                            <div class="control horizontal-select">
+                                <input
+                                        id="{{ searchForm.gain.from.vars.id }}"
+                                        name="{{ searchForm.gain.from.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'from'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.gain.from.vars.data %}value="{{ searchForm.gain.from.vars.data }}"{% endif %}
+                                >
+                                <p>-</p>
+                                <input
+                                        id="{{ searchForm.gain.to.vars.id }}"
+                                        name="{{ searchForm.gain.to.vars.full_name }}"
+                                        type="number"
+                                        placeholder="{{ 'to'|trans }}"
+                                        class="input"
+                                        min="0"
+                                        {% if searchForm.gain.to.vars.data %}value="{{ searchForm.gain.to.vars.data }}"{% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-7">
+                        <div class="field line-field-keywords" >
+                            <label class="label">{{ 'keywords'|trans }}</label>
+                            <div class="control">
+                                <input
+                                        id="{{ searchForm.name.vars.id }}"
+                                        name="{{ searchForm.name.vars.full_name }}"
+                                        class="input"
+                                        type="text"
+                                        placeholder="{{ 'keywords'|trans }}"
+                                        {% if searchForm.name.vars.data %}value="{{ searchForm.name.vars.data }}"{% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-4">
+                        <div class="field  text-center check-box-block">
+                            <input
+                                    type="checkbox"
+                                    id="{{ searchForm.isVerify.vars.id }}"
+                                    name="{{ searchForm.isVerify.vars.full_name }}"
+                                    value="{{ searchForm.isVerify.vars.data }}"
+                                    {% if searchForm.isVerify.vars.data %}checked{% endif %}
+                            >
+                            <label for="{{ searchForm.isVerify.vars.id }}">
+                                {{ 'only_verify'|trans }}
+                            </label>
+
+                            {#<input type="checkbox" id="box-2">
+                            <label for="box-2">{{ 'favorites'|trans }}</label>#}
+                        </div>
+                    </div>
+
+                    <div class="column is-1">
+                        <button class="button btn-green">{{ 'search'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        {% do searchForm.name.setRendered %}
+        {% do searchForm.subscribers.setRendered %}
+        {% do searchForm.price.setRendered %}
+        {% do searchForm.gain.setRendered %}
+        {% do searchForm.isVerify.setRendered %}
+        {{ form_end(searchForm) }}
+    </div>
+</div>

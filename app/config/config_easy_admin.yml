@@ -1,0 +1,235 @@
+easy_admin:
+    site_name: '%site_name%'
+
+    design:
+        brand_color: '#7A70CD'
+        assets:
+            css: ['build/css/admin_style.css']
+        templates:
+            layout: '@App/layouts/admin.html.twig'
+        form_theme: 'vertical'
+        menu:
+            - { label: 'Main', route: admin_dashboard, default: true, icon: 'dashboard' }
+            - { label: 'Home', route: home, icon: 'home' }
+            - { label: 'Users' }
+            - { label: 'Users', entity: Users, icon: 'user' }
+            - { label: 'Group Information' }
+            - { label: 'Groups', entity: Groups, icon: 'group' }
+            - { label: 'Comments', entity: Comments, icon: 'comments' }
+            - { label: 'Currency', entity: Currency, icon: 'money' }
+            - { label: 'Site Reports' }
+            - { label: 'Reports', entity: Reports, icon: 'envelope' }
+            - { label: 'Contacts' }
+            - { label: 'Contacts', entity: Contacts, icon: 'address-card' }
+
+    entities:
+
+      # Users
+        Users:
+            class: AppBundle\Entity\User
+            list:
+                title: 'List of Users'
+                actions:
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'edit', icon: 'edit', label: '', title: 'action.edit' }
+                    - { name: 'delete', icon: 'trash', label: '', title: 'action.delete' }
+                    - '-new'
+                fields:
+                    - id
+                    - { property: 'imagePath', type: 'image', label: 'Avatar' }
+                    - { property: 'username', label: 'Username' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+                    - { property: 'enabled', type: 'boolean', label: 'Is Enabled?', sortable: false}
+                    - { property: 'createdAt', format: 'd.m.Y', label: 'Date of Registration' }
+                sort: ['id', 'DESC']
+            edit:
+                fields:
+                    -
+                      property: 'id'
+                      type_options: { disabled: true }
+                    -
+                      property: 'username'
+                      label: 'Username'
+                      type_options: { disabled: true }
+                    -
+                      property: 'email'
+                      label: 'Email'
+                      type_options: { disabled: true }
+                    - { property: 'enabled', label: 'Is Enabled?' }
+                    -
+                      property: 'roles'
+                      label: 'Roles'
+                      type: choice
+                      type_options:
+                        expanded: true
+                        multiple: true
+                        choices: [ Admin: ROLE_ADMIN ]
+                    - { property: 'createdAt', label: 'Date of Registration' }
+            templates:
+                field_image: '@App/admin/fields/_image_users.html.twig'
+
+        # Groups
+        Groups:
+            class: AppBundle\Entity\Groups
+            list:
+                title: 'List of Groups'
+                actions:
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'edit', icon: 'edit', label: '', title: 'action.edit' }
+                    - { name: 'delete', icon: 'trash-o', label: '', title: 'action.delete' }
+                    - '-new'
+                fields:
+                    - id
+                    - { property: 'group_avatar', type: image, label: 'Photo'}
+                    - { property: 'name', label: 'Name'}
+                    - { property: 'link', type: url, label: 'Link' }
+                    - { property: 'user', label: 'User' }
+                    - { property: 'subscribers', label: 'Subscribers'}
+                    - { property: 'price', label: 'Price' }
+                    - { property: 'isVerify',  type: 'boolean', label: 'Verify', sortable: false }
+                sort: ['updatedAt', 'DESC']
+            edit:
+                fields:
+                    - { type: group, label: 'Basic Information', css_class: 'col-lg-12 col-md-12 col-sm-12' }
+                    -
+                      property: 'id'
+                      type_options: { disabled: true }
+                    -
+                      property: 'link'
+                      type_options: { disabled: true }
+                    -
+                      property: 'slug'
+                      type_options: { disabled: true }
+                    -
+                      property: 'code'
+                      type_options: { disabled: true }
+                    -
+                      property: 'social'
+                      type_options: { disabled: true }
+
+                    - { type: group, label: 'Group Details', css_class: 'col-lg-6 col-md-6 col-sm-12' }
+                    - { property: 'name' }
+                    - { property: 'isVerify', label: 'Verify' }
+                    - { property: 'description' }
+                    - { property: 'createdAt', label: 'Upload date' }
+
+                    - { type: group, label: 'Cost of Group', css_class: 'col-lg-6 col-md-6 col-sm-12' }
+                    - { property: 'price' }
+                    - { property: 'gain' }
+                    - { property: 'expense' }
+                    - { property: 'currency' }
+
+        # Comments
+        Comments:
+            class: AppBundle\Entity\Comments
+            list:
+                title: 'List of Comments'
+                actions:
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'edit', icon: 'edit', label: '', title: 'action.edit' }
+                    - { name: 'delete', icon: 'trash-o', label: '', title: 'action.delete' }
+                    - '-new'
+                fields:
+                    - id
+                    - { property: 'user', label: 'User' }
+                    - { property: 'group', label: 'Group' }
+                    - { property: 'createdAt', label: 'Comment added' }
+                sort: ['id', 'DESC']
+            edit:
+                fields:
+                    - { type: section, label: 'Basic Information' }
+                    -
+                      property: 'id'
+                      type_options: { disabled: true }
+                    -
+                      property: 'group'
+                      label: 'Group'
+                      type_options: { disabled: true }
+                    -
+                      property: 'user'
+                      label: 'Sender name'
+                      type_options: { disabled: true }
+                    -
+                      property: 'parent'
+                      label: 'Reply to comment'
+                      type_options: { disabled: true }
+
+                    - { type: section, label: 'Comments' }
+                    - { property: 'message', label: 'message' }
+
+        # Currency
+        Currency:
+            class: AppBundle\Entity\Currency
+            list:
+                actions:
+                    - { name: 'new', icon: 'plus', label: 'Add Currency' }
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'edit', icon: 'edit', label: '', title: 'action.edit' }
+                    - { name: 'delete', icon: 'trash-o', label: '', title: 'action.delete' }
+                fields:
+                  - id
+                  - { property: 'symbol', label: 'Symbol' }
+                  - { property: 'denomination', label: 'Denomination' }
+                  - { property: 'isShow', label: 'Is Show?', sortable: false }
+            form:
+                fields:
+                  - id
+                  - { property: 'symbol', label: 'Symbol' }
+                  - { property: 'denomination', label: 'Denomination' }
+                  - { property: 'isShow', label: 'Is Show?' }
+            new:
+                fields:
+                  - '-id'
+            edit:
+                fields:
+                  -
+                    property: 'id'
+                    type_options: { disabled: true }
+
+        # Contancts
+        Contacts:
+            class: AppBundle\Entity\SiteContacts
+            list:
+                actions:
+                    - { name: 'new', icon: 'plus', label: 'New Contact' }
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'edit', icon: 'edit', label: '', title: 'action.edit' }
+                    - { name: 'delete', icon: 'trash-o', label: '', title: 'action.delete' }
+                fields:
+                    - id
+                    - { property: 'icon', template: '@App/admin/fields/_icon_contacts.html.twig', sortable: false }
+                    - { property: 'name' }
+                    - { property: 'value', label: 'Value' }
+                    - { property: 'isEnabled', label: 'Is Enabled?', sortable: false }
+            form:
+                fields:
+                    - id
+                    - { property: 'icon', label: 'Icon' }
+                    - { property: 'name'}
+                    - { property: 'value', label: 'Value'}
+                    - { property: 'isEnabled', label: 'Is Enabled?'}
+            new:
+                fields:
+                    - '-id'
+            edit:
+                fields:
+                    -
+                      property: 'id'
+                      type_options: { disabled: true }
+
+
+        # Reports
+        Reports:
+            class: AppBundle\Entity\Reports
+            list:
+                actions:
+                    - { name: 'show', icon: 'eye', label: '', title: 'action.show' }
+                    - { name: 'delete', icon: 'trash-o', label: '', title: 'action.delete' }
+                    - '-new'
+                    - '-edit'
+                fields:
+                    - id
+                    - { property: 'name', label: 'Sender name' }
+                    - { property: 'email', label: 'Sender email' }
+                    - { property: 'isRead', label: 'Is Read?', sortable: false }
+                    - { property: 'createdAt', label: 'Sent' }

@@ -1,0 +1,25 @@
+/*
+ * Component: Dropdown menus
+ * -------------------------
+ */
+
+.main-header .navbar .nav>li>a {
+  color: #fff;
+}
+
+.main-header .navbar .nav>li>a:hover, .main-header .navbar .nav>li>a:active, .main-header .navbar .nav>li>a:focus, .main-header .navbar .nav .open>a, .main-header .navbar .nav .open>a:hover, .main-header .navbar .nav .open>a:focus, .main-header .navbar .nav>.active>a {
+  background: rgba(0,0,0,0.1);
+  color: #f6f6f6;
+}
+
+.navbar-custom-menu li.messages-menu, .navbar-custom-menu li.notifications-menu {
+  margin-left: -10px;
+  margin-right: 20px;
+}
+
+@media (min-width: 768px){
+  .navbar-custom-menu li.messages-menu, .navbar-custom-menu li.notifications-menu {
+    line-height: 40px;
+    width: auto;
+  }
+}
